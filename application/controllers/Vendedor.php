@@ -35,18 +35,19 @@ class Vendedor extends CI_Controller
 		/* Mandar o Email de Parabens, contendo Dados de Login */
 
 		if($result){
-			$this->load->library('email');
+			return redirect('Vendedor/index');
+		/*$this->load->library('email');
 			$this->email->set_newline("\r\n");
 			$this->email->from("jeremyellmagnifico@gmail.com", 'Best$ells');
 			$this->email->subject("Assunto do e-mail");
 			$this->email->to($vend_email); 
 			$this->email->message("Aqui vai a mensagem ao seu destinatário");
 			if($this->email->send()){
-				return redirect('Vendedor/index');
+				
 			}
 			else{
 				show_error($this->email->print_debugger());
-			}
+			}*/
 						
 		}
 		else{
@@ -65,6 +66,7 @@ class Vendedor extends CI_Controller
 			return redirect('Vendedor/Dashboard');
 		}
 		else{
+			$this->session->set_flashdata('msg','Your Username e Password Do Not Match To Any Account');
 			return redirect('Vendedor/index');
 		}
 	}

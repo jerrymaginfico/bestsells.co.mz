@@ -39,7 +39,13 @@ class Admin extends CI_Controller
 			return redirect('Admin/index');
 		}
 		else{
-			$this->load->view('Admin/Dashboard');
+			$admin_info = $this->am->getAdminData();
+			$admin_id = $admin_info->admin_id;
+			$result = $this->am->getAdminInfo($admin_id);
+			$getVerified = $this->am->getVerifiedUsers();
+			$getAll = $this->am->getAllUsers();
+			$getSuspended = $this->am->getSuspendedUsers();
+			$this->load->view('Admin/Dashboard',['admin'=>$result,'vusers'=>$getVerified,'ausers'=>$getAll,'susers'=>$getSuspended]);
 		}
 	}
 

@@ -36,8 +36,6 @@
 		<!-- Google font -->
 		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
-		<!-- Materialize file Include -->
-
 		<!-- Bootstrap -->
 		<link type="text/css" rel="stylesheet" href="<?php echo base_url();?>bestsells/css/bootstrap.min.css"/>
 
@@ -66,8 +64,8 @@
 						<li><a href="#"><i class="fa fa-map-marker"></i>Maputo, Matola</a></li>
 					</ul>
 					<ul class="header-links pull-right">
-						<li><a href="#"><i class="fa fa-plus"></i> Publicar</a></li>
-						<li><a href="<?php echo base_url();?>navegate/login"><i class="fa fa-user-o"></i> Minha Conta</a></li>
+						<li><a href="<?php echo base_url('Vendedor/index');?>"><i class="fa fa-plus"></i> Publicar</a></li>
+						<li><a href="<?php echo base_url('Vendedor/sign_up');?>"><i class="fa fa-user-o"></i> Minha Conta</a></li>
 					</ul>
 				</div>
 			</div>
@@ -92,22 +90,34 @@
 		<!-- /LOGO -->
 		
 		<!-- SEARCH BAR -->
-						<div class="col-md-6">
-							<div class="header-search">
-								<form>
-									<select class="input-select">
-										<option value="0">Todas</option>
-										<option value="1">Eletrónicos</option>
-										<option value="2">Eletrod.</option>
-										<option value="3">Automovéis</option>
-										<option value="4">Moda Masc.</option>
-										<option value="4">Moda Femin.</option>		
-									</select>
-									<input class="input" placeholder="Produto">
-									<button class="search-btn">Procurar</button>
-								</form>
-							</div>
-						</div>
+		<div class="col-md-6">
+			<div class="header-search">
+				<ul id="search_items">
+				<h6 style="font-size:16px;;color:#fff;">Procurar</h6>
+				 <?= form_open("Home/search_result");?>
+					<li>
+						<select name="listing_items" id="listing_items">
+								<option selected disabled>Categoria do Artigo</option>
+								<option value="celulares">Celulares</option>
+								<option value="desktop">Computadores de Mesa</option>
+								<option value="laptops">Laptops</option>
+								<option value="geleiras">Geleiras & Congeladores</option>
+								<option value="carros particulares">Carros Particulares</option>
+								<option value="semi colectivos">Carros Semi-Colectivos</option>
+								<option value="carros de carga">Carros de Carga / Pesados</option>
+								<option value="camisetes masculinas">Camisetes Masculinas</option>
+								<option value="calcados masculinos">Calçados Masculinos</option>
+								<option value="blusas femeninas">Blusas & Camisetes Femeninas</option>
+								<option value="calcados femeninos">Calçados Femeninos</option>
+						</select>
+							<input type="text" name="article" id="article" placeholder="Titulo do Artigo" required>
+							<button class="btn btn-primary" id="btnSearch">Procurar&nbsp;&nbsp;<span class="fa fa-search"></span></button>
+						</li>
+					</ul>
+					<?=form_close();?>
+			</div>
+		</div>
+		<!-- /SEARCH BAR -->
 		<!-- Menu Toogle -->
 		<div class="menu-toggle">
 			<a href="#">
@@ -125,8 +135,6 @@
 		</header>
 		<!-- /HEADER -->
 
-
-		<!-- NAVIGATION -->
 		<!-- NAVIGATION -->
 <nav id="navigation">
 			<!-- container -->
@@ -135,51 +143,50 @@
 				<div id="responsive-nav">
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
-						<li class="active"><a href="<?php echo base_url();?>navegate/home">Home</a></li>
+						<li class="active"><a href="<?php echo base_url();?>Home/index">Home</a></li>
 						<li><a href="#">Eletrónicos</a>
 							<ul>
-								<li><a href="#!">Celulares</a></li>
-								<li><a href="#!">Computadores de Mesa</a></li>
-								<li><a href="#!">Laptops</a></li>
-								<li><a href="#!">Tablets</a></li>
-								<li><a href="#!">Impressoras & Fotocopiadoras</a></li>
-								<li><a href="#!">Acessórios Eletrónicos</a></li>
+								<li><a href="<?php echo base_url('Home/store_celulares');?>">Celulares</a></li>
+								<li><a href="<?php echo base_url('Home/store_desktops');?>">Computadores de Mesa</a></li>
+								<li><a href="<?php echo base_url('Home/store_laptops');?>">Laptops</a></li>
+								<li><a href="<?php echo base_url('Home/store_tablets');?>">Tablets</a></li>
+								<li><a href="<?php echo base_url('Home/store_printers');?>">Impressoras & Fotocopiadoras</a></li>
+								<li><a href="<?php echo base_url('Home/store_eletronic_acessories');?>">Acessórios Eletrónicos</a></li>
 							</ul>
 						</li>
 						<li><a href="#">Eletrodomésticos</a>
 							<ul>
-								<li><a href="#!">Geleiras & Congeladores</a></li>
-								<li><a href="#!">Fogões</a></li>
-								<li><a href="#!">Televisores</a></li>
-								<li><a href="#!">Acessórios Eletrodomésticos</a></li>
+								<li><a href="<?php echo base_url('Home/store_freezers');?>">Geleiras & Congeladores</a></li>
+								<li><a href="<?php echo base_url('Home/store_fogoes');?>">Fogões</a></li>
+								<li><a href="<?php echo base_url('Home/store_televisores');?>">Televisores</a></li>
+								<li><a href="<?php echo base_url('Home/store_eletrodomestic_acessories');?>">Acessórios Eletrodomésticos</a></li>
 							</ul>
 						</li>
-						<li><a href="novos.html">Carros</a>
+						<li><a href="#">Carros</a>
 							<ul>
-								<li><a href="#!">Carros Particulares</a></li>
-								<li><a href="#!">Transporte de Passageiros</a></li>
-								<li><a href="#!">Transporte de Carga/Pesados</a></li>
-								<li><a href="#!">Motos & Triciclos</a></li>
-								<li><a href="#!">Bicicletas</a></li>
-								<li><a href="#!">Acessórios De Carros & Automoveis</a></li>
+								<li><a href="<?php echo base_url('Home/store_carros_particulares');?>">Carros Particulares</a></li>
+								<li><a href="<?php echo base_url('Home/store_carros_colectivos');?>">Transporte de Passageiros</a></li>
+								<li><a href="<?php echo base_url('Home/store_carros_de_carga');?>">Transporte de Carga/Pesados</a></li>
+								<li><a href="<?php echo base_url('Home/store_motos_e_triciclos');?>">Motos & Triciclos</a></li>
+								<li><a href="<?php echo base_url('Home/store_bicicletas');?>">Bicicletas</a></li>
+								<li><a href="<?php echo base_url('Home/store_cars_acessories');?>">Acessórios De Carros & Automoveis</a></li>
 							</ul>
 						</li>
-						<li><a href="about.html">Moda Masculina</a>
+						<li><a href="#">Moda Masculina</a>
 							<ul>
-								<li><a href="#!">Camisas & Camisetes</a></li>
-								<li><a href="#!">Calças</a></li>
-								<li><a href="#!">Calçados</a></li>
-								<li><a href="#!">Acessórios Masculinos</a></li>
+								<li><a href="<?php echo base_url('Home/store_camisas_masculinas');?>">Camisas & Camisetes</a></li>
+								<li><a href="<?php echo base_url('Home/store_calcas_masculinas');?>">Calças</a></li>
+								<li><a href="<?php echo base_url('Home/store_calcados_masculinos');?>">Calçados</a></li>
+								<li><a href="<?php echo base_url('Home/store_men_accesories');?>">Acessórios Masculinos</a></li>
 							</ul>
 						</li>
-						<li><a href="login.html">Moda Feminina</a>
+						<li><a href="#">Moda Feminina</a>
 							<ul>
-								<li><a href="#!">Blusas, Camisas & Camisetes</a></li>
-								<li><a href="#!">Calças</a></li>
-								<li><a href="#!">Calçados</a></li>
-								<li><a href="#!">Acessórios Femeninos</a></li>
+								<li><a href="<?php echo base_url('Home/store_blusas_femininas');?>">Blusas, Camisas & Camisetes</a></li>
+								<li><a href="<?php echo base_url('Home/store_calcas_femininas');?>">Calças</a></li>
+								<li><a href="<?php echo base_url('Home/store_calcados_femininos');?>">Calçados</a></li>
+								<li><a href="<?php echo base_url('Home/store_women_acessories');?>">Acessórios Femeninos</a></li>
 
-								<!--Quando colocar Slideshow, colocar a posicao da nav como absolute-->
 							</ul>
 						</li>
 					</ul>
@@ -214,10 +221,16 @@
 			<div class="login100-more" style="background-image: url('<?=base_url('bestsells/img/E-commerce-Payment.png');?>');"></div>
 			<div class="wrap-login100 p-l-50 p-r-50 p-t-72 p-b-50">
 				<?=form_open("Vendedor/Login");?>
+					
 					<span class="login100-form-title p-b-59">
 						Entrar Na Minha Conta
 					</span>
 
+					<?php if($msg = $this->session->flashdata('msg')):?>
+
+						<h1 style="font-size: 14px; color:red;"><?=$msg;?></h1>
+					<?php endif;?>
+						<br>
 
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
 						<span class="label-input100">Email</span>
@@ -240,7 +253,7 @@
 						</div>
                         <br>
                         
-						<a href="<?php echo base_url();?>navegar/vendedor" class="dis-block txt3 hov1 p-r-30 p-t-10 p-b-10 p-l-30">
+						<a href="<?php echo base_url('Vendedor/sign_up');?>" class="dis-block txt3 hov1 p-r-30 p-t-10 p-b-10 p-l-30">
 							Criar Conta
 							<i class="fa fa-long-arrow-right m-l-5"></i>
 						</a>
@@ -284,9 +297,6 @@
 								</li>
 								<li>
 									<a href="#"><i class="fa fa-twitter"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="fa fa-whatsapp"></i></a>
 								</li>
 							</ul>
 						</div>
@@ -332,10 +342,9 @@
 							<div class="footer">
 								<h3 class="footer-title">Important Link</h3>
 								<ul class="footer-links">
-									<li><a href="<?php echo base_url();?>navegate/home">Home</a></li>
-									<li><a href="#">Criar Conta</a></li>
-									<li><a href="#">Conta</a></li>
-									<li><a href="<?php echo base_url();?>navegate/faq">Frequently Asked Questions</a></li>
+									<li><a href="<?php echo base_url('Home/index');?>">Home</a></li>
+									<li><a href="<?php echo base_url('Vendedor/sign_up');?>">Criar Conta</a></li>
+									<li><a href="<?php echo base_url('Vendedor/index');?>">Minha Conta</a></li>
 								</ul>
 							</div>
 						</div>

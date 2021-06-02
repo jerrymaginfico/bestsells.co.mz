@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
+  <link rel="shortcut icon" href="<?php echo base_url();?>bestsells/img/bestlogo.png">
   <title><?php echo get_phrase('BestSellS');?></title>
 
   <!-- Font Awesome Icons -->
@@ -43,12 +44,6 @@
           <i class="far fa-user"></i>
         </a>
       </li>
-      <!-- Notifications Dropdown Menu -->
-      <li class="nav-item dropdown">
-        <a class="nav-link" href="#">
-          <i class="fa fa-cogs"></i>
-        </a>
-      </li>
     </ul>
   </nav>
   <!-- /.navbar -->
@@ -56,10 +51,10 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-      <img src="<?=base_url('assets/vendedor/dist/img/AdminLTELogo.png');?>" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+    <a href="<?=base_url('Home/index');?>" class="brand-link">
+      <img src="<?=base_url('bestsells/img/bestlogo.png');?>" class="brand-image img-circle elevation-3"
            style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminLTE 3</span>
+      <span class="brand-text font-weight-light"><?php echo get_phrase('Best$ells');?></span>
     </a>
 
     <!-- Sidebar -->
@@ -67,10 +62,10 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="<?=base_url('assets/vendedor/dist/img/user2-160x160.jpg');?>" class="img-circle elevation-2" alt="User Image">
+        <img src="<?=base_url('assets/img/vendedor.png');?>" class="img-circle elevation-2 img-responsive" alt="User Image">
         </div>
         <div class="info">
-          <a href="<?php echo base_url();?>navegate/admin_perfil" class="d-block">Nome Admin</a>
+          <a href="#" class="d-block"><?=$admin->admin_username;?></a>
         </div>
       </div>
 
@@ -112,13 +107,7 @@
           <br>
           <li class="nav-header"><b>--- SUPORTE</b></li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-cog"></i>
-              <p class="text">Definicoes</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link" data-toggle="modal" data-target="#modal-contact">
               <i class="nav-icon fa fa-info"></i>
               <p>Ajuda & Contacto</p>
             </a>
@@ -163,26 +152,9 @@
         <div class="row">
           <div class="col-lg-3 col-6">
             <!-- small card -->
-            <div class="small-box bg-info">
-              <div class="inner">
-                <h3>150</h3>
-
-                <p>Novas Publicacoes</p>
-              </div>
-              <div class="icon">
-                <i class="fas fa-shopping-cart"></i>
-              </div>
-              <a href="#" class="small-box-footer">
-                Ver Todas <i class="fas fa-arrow-circle-right"></i>
-              </a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small card -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
+                <h3><?=count($vusers);?></h3>
 
                 <p>Usu. Verificados</p>
               </div>
@@ -190,41 +162,42 @@
                 <i class="fas fa-users"></i>
               </div>
               <a href="#" class="small-box-footer">
-                Ver Todos <i class="fas fa-arrow-circle-right"></i>
+                Ver Mais <i class="fas fa-arrow-circle-right"></i>
               </a>
             </div>
           </div>
+          <div class="col-lg-3 col-6">
+            <!-- small card -->
+            <div class="small-box bg-danger">
+              <div class="inner">
+                <h3><?=count($susers);?></h3>
+
+                <p>Usuários Suspensos</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-ban"></i>
+              </div>
+              <a href="#" class="small-box-footer">
+                Ver Mais <i class="fas fa-arrow-circle-right"></i>
+              </a>
+            </div>
+          </div>
+          <!-- ./col -->
+
           <!-- ./col -->
           <div class="col-lg-3 col-6">
             <!-- small card -->
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3>44</h3>
+                <h3><?=count($ausers);?></h3>
 
-                <p>Novos Usuarios</p>
+                <p>Todos Usuários</p>
               </div>
               <div class="icon">
                 <i class="fas fa-user-plus"></i>
               </div>
               <a href="#" class="small-box-footer">
-                Ver Todos <i class="fas fa-arrow-circle-right"></i>
-              </a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small card -->
-            <div class="small-box bg-danger">
-              <div class="inner">
-                <h3>65</h3>
-
-                <p>Novos Visitantes</p>
-              </div>
-              <div class="icon">
-                <i class="fas fa-chart-pie"></i>
-              </div>
-              <a href="#" class="small-box-footer">
-                Ver Todos <i class="fas fa-arrow-circle-right"></i>
+                Ver Mais <i class="fas fa-arrow-circle-right"></i>
               </a>
             </div>
           </div>
@@ -586,6 +559,49 @@
       <!-- /.modal -->
 
  <!--SubCategory Modal End-->
+
+ <!-- XIT2S Modal Info -->
+
+ <div class="modal fade" id="modal-contact">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title"><?php echo get_phrase('Contacto & Localizacao');?></h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                  </div>
+                  <input type="text" class="form-control" name="email" id="email" value="jeremias.honwana@xit2s.com" disabled>
+            </div>
+              <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                  </div>
+                  <input type="text" class="form-control" name="contact1" id="contact1"  value="+258 84/87 057 6568" disabled>
+                </div>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-map-marker"></i></span>
+                  </div>
+                  <input type="text" class="form-control" name="local" id="local" value="Localizacao" disabled>
+            </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo get_phrase('Fechar');?></button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+
+
 
   <!-- Main Footer -->
   <footer class="main-footer">
