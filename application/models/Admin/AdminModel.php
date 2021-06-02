@@ -326,6 +326,32 @@ class AdminModel extends CI_Model
 		else
 			return $getS_users->result();
 	}
+
+	function get_seller($vend_id){
+		$seller = $this->db->get_where('vendedor',['vend_id'=>$vend_id]);
+
+		if($seller->num_rows()>0){
+			return $seller->row();
+		}
+		else
+			return $seller->row();
+	}
+
+	function set_status($vend_id){
+		$set = [
+			'status'=>$this->input->post('status'),
+			'data_cadastro'=>date('Y-m-d')
+		];
+
+		$update = $this->db->where('vend_id',$vend_id)
+						   ->update('vendedor',$set);
+		if($update){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
 	
 	//Ao fazer login, o programa deve verificar o estado do vendedor
 }

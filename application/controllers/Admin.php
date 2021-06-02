@@ -279,6 +279,40 @@ class Admin extends CI_Controller
 		}
 		echo $output;
 	}
+
+	// function to call the update user status page
+	function update_status($vend_id){
+		$seller = $this->am->get_seller($vend_id);
+		if($this->session->userdata('admin_username') == "" && $this->session->userdata('admin_password') == ""){
+			return redirect('Admin/index');
+		}
+		else{
+			$admin_info = $this->am->getAdminData();
+			$admin_id = $admin_info->admin_id;
+			$result = $this->am->getAdminInfo($admin_id);
+			$this->load->view('Admin/update_status',['admin'=>$result,'seller'=>$seller]);
+		}
+	}
+
+	// function to update seller status
+	function set_status($vend_id){
+		if($this->session->userdata('admin_username') == "" && $this->session->userdata('admin_password') == ""){
+			return redirect('Admin/index');
+		}
+		else{
+			$set_status = $this->am->set_status($vend_id);
+
+			if($set_status){
+				$admin_info = $this->am->getAdminData();
+				$admin_id = $admin_info->admin_id;
+				$result = $this->am->getAdminInfo($admin_id);
+				return redirect('Admin/Dashboard');
+			}
+			else{
+				echo"<script>alert('Erro Actualizando Estado.')</script>";
+			}
+		}
+	}
 }
 
 ?>

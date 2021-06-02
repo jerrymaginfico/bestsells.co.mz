@@ -75,31 +75,17 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item has-treeview menu-open">
-            <a href="#" class="nav-link active">
+            <a href="<?php echo base_url('Admin/Dashboard');?>" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a data-toggle="modal" data-target="#modal-default" class="nav-link" style="cursor: pointer;">
-              <i class="nav-icon fas fa-plus-square"></i>
-              <p>
-                Adicionar Produtos
-                <span class="right badge badge-danger"></span>
-              </p>
-            </a>
-          </li>
-           <li class="nav-item">
-            <a data-toggle="modal" data-target="#modal-sub" class="nav-link" style="cursor: pointer;">
-              <i class="nav-icon fas fa-plus-square"></i>
-              <p>
-                Adicionar Marcas
-                <span class="right badge badge-danger"></span>
-              </p>
-            </a>
-          </li>
+          <br>
+          <br>
+          <br>
+          <br>
           <br>
           <br>
           <br>
@@ -137,7 +123,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Dashboard</li>
+              <li class="breadcrumb-item active">Actualizar Estado</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -148,241 +134,79 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-        <!-- Info boxes -->
-        <div class="row">
-          <div class="col-lg-3 col-6">
-            <!-- small card -->
-            <div class="small-box bg-success">
-              <div class="inner">
-                <h3><?=count($vusers);?></h3>
-
-                <p>Usu. Verificados</p>
-              </div>
-              <div class="icon">
-                <i class="fas fa-users"></i>
-              </div>
-              <a href="#" class="small-box-footer">
-                Ver Mais <i class="fas fa-arrow-circle-right"></i>
-              </a>
-            </div>
-          </div>
-          <div class="col-lg-3 col-6">
-            <!-- small card -->
-            <div class="small-box bg-danger">
-              <div class="inner">
-                <h3><?=count($susers);?></h3>
-
-                <p>Usuários Suspensos</p>
-              </div>
-              <div class="icon">
-                <i class="fas fa-ban"></i>
-              </div>
-              <a href="#" class="small-box-footer">
-                Ver Mais <i class="fas fa-arrow-circle-right"></i>
-              </a>
-            </div>
-          </div>
-          <!-- ./col -->
-
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small card -->
-            <div class="small-box bg-warning">
-              <div class="inner">
-                <h3><?=count($ausers);?></h3>
-
-                <p>Todos Usuários</p>
-              </div>
-              <div class="icon">
-                <i class="fas fa-user-plus"></i>
-              </div>
-              <a href="#all_users" class="small-box-footer">
-                Ver Mais <i class="fas fa-arrow-circle-right"></i>
-              </a>
-            </div>
-          </div>
-          <!-- ./col -->
-        </div>
-        <!-- /.row -->
-        <!-- /.row -->
-         <div class="row">
-          <div class="col-12">
-            <div class="card card-warning card-outline" id="all_users">
+        
+        <!-- SELECT2 EXAMPLE -->
+        <!-- general form elements -->
+        <div class="card card-info">
               <div class="card-header">
-                <h3 class="card-title"><?php echo get_phrase('Lista de Usuarios');?></h3>
-                 
+                <h3 class="card-title"><?php echo get_phrase('Actualizar Estado do Usuario: ');?><?=$seller->nome_completo;?></h3>
+                <br>
+                <br>
+                <?=form_open('admin/set_status/'.$seller->vend_id);?>
+                <div class="form-group">
+                  <select class="form-control" name="status" id="status" required>
+                    <option selected disabled> Selecione o novo estado</option>
+                    <option value="Suspended">Suspenso</option>
+                    <option value="Validated">Validado</option>
+                    <option value="Verifyied">Verificado</option>
+                  </select> 
+                </div>
               </div>
               <!-- /.card-header -->
-              <div class="card-body">
-                <table id="example2" class="table table-bordered table-hover">
-                  <thead>
-                  <tr>
-                    <th>Nome Usuario</th>
-                    <th>Email</th>
-                    <th>Contacto</th>
-                    <th>Status</th>
-                    <th>Operacoes</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <?php if(count($ausers)):?>
-                    <?php foreach($ausers as $user):?>
-                    <tr>
-                      <td><?=$user->nome_completo;?></td>
-                      <td><?=$user->email;?></td>
-                      <td><?=$user->vend_contato1;?></td>
-                      <td><?=$user->status;?></td>
-                      <td>
-                        <center>
-                          <a href="<?=base_url('admin/update_status/'.$user->vend_id);?>" class="btn btn-warning btn-circle btn-sm" title="Editar Estado"><i class="fa fa-ban"></i></a>
-                          <a href="<?=base_url('admin/remove_user/'.$user->vend_id);?>" title="Remover Vendedor" class="btn btn-danger btn-circle btn-sm text-white"><i class="fa fa-times"></i></a
-                        </center>
-                      </td>
-                    </tr>
-                    <?php endforeach;
-                else:?>
-                  <tr>
-                    <td colspan="5"><?php echo get_phrase('Sem Vendedores.');?></td>
-                  </tr>
-                <?php endif;?>
-                  </tbody>
-                  <tfoot>
-                  <tr>
-                    <th>Nome Usuario</th>
-                    <th>Email</th>
-                    <th>Contacto</th>
-                    <th>Status</th>
-                    <th>Operacoes</th>
-                  </tr>
-                  </tfoot>
-                </table>
-              </div>
-              <!-- /.card-body -->
-            </div>
+              <!-- form start -->
+              <table class="table">
+                <tr>
+                  <td>
+                  <div class="form-group">
+                    <label for="full_name"><?php echo get_phrase('Nome Completo');?></label>
+                    <input type="text" class="form-control" name="full_name" id="full_name" value="<?=$seller->nome_completo;?>" readonly>
+                  </div>
+                  </td>
+                  <td>
+                  <div class="form-group">
+                    <label for="email"><?php echo get_phrase('Email');?></label>
+                    <input type="email" class="form-control" name="email" id="email" value="<?=$seller->email;?>" readonly>
+                  </div>
+                  </td>
+                </tr>
+                <tr>
+                <td style="border-top: none;">
+                  <div class="form-group">
+                    <label for="phone1"><?php echo get_phrase('Contacto 1');?></label>
+                    <input type="text" class="form-control" name="phone1" id="phone1" value="<?=$seller->vend_contato1;?>" readonly>
+                  </div>
+                  </td>
+                  <td style="border-top: none;">
+                  <div class="form-group">
+                    <label for="phone2"><?php echo get_phrase('Contacto 2');?></label>
+                    <input type="text" class="form-control" name="phone2" id="phone2" value="<?=$seller->vend_contato2;?>" readonly>
+                  </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="border-top: none;">
+                  <div class="form-group">
+                    <label for="location"><?php echo get_phrase('Localizacao');?></label>
+                    <input type="text" class="form-control" name="location" id="location" value="<?=$seller->vend_localizacao;?>" readonly>
+                  </div>
+                  </td>
+                  <td style="border-top: none;">
+                    <div class="form-group">
+                    <label for="actual_status"><?php echo get_phrase('Actual Estado');?></label>
+                     <input type="text" class="form-control" name="actual_status" readonly id="actual_status" value="<?=$seller->status;?>">
+                  </div>
+                  </td>
+                </tr>
+              </table>
             <!-- /.card -->
-
-            <div class="card card-warning card-outline">
-              <div class="card-header">
-                <h3 class="card-title"><?php echo get_phrase('Produtos');?></h3>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
-                  <thead>
-                  <tr>
-                    <th>Nome</th>
-                    <th>Email</th>
-                    <th>Contacto</th>
-                    <th>Localizacao</th>
-                    <th>Operacoes</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr>
-                    <td>Trident</td>
-                    <td>Internet
-                      Explorer 4.0
-                    </td>
-                    <td>Win 95+</td>
-                    <td> 4</td>
-                    <td>X</td>
-                  </tr>
-                  <tr>
-                    <td>Trident</td>
-                    <td>Internet
-                      Explorer 5.0
-                    </td>
-                    <td>Win 95+</td>
-                    <td>5</td>
-                    <td>C</td>
-                  </tr>
-                  <tr>
-                    <td>Trident</td>
-                    <td>Internet
-                      Explorer 5.5
-                    </td>
-                    <td>Win 95+</td>
-                    <td>5.5</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Trident</td>
-                    <td>Internet
-                      Explorer 6
-                    </td>
-                    <td>Win 98+</td>
-                    <td>6</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Trident</td>
-                    <td>Internet Explorer 7</td>
-                    <td>Win XP SP2+</td>
-                    <td>7</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Trident</td>
-                    <td>AOL browser (AOL desktop)</td>
-                    <td>Win XP</td>
-                    <td>6</td>
-                    <td>
-                      <center>
-                      <a class="btn btn-warning btn-circle btn-sm"><i class="fa fa-ban"></i></a>
-                      <a class="btn btn-danger btn-circle btn-sm"><i class="fa fa-times"></i></a>
-                      </center>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Gecko</td>
-                    <td>Firefox 1.0</td>
-                    <td>Win 98+ / OSX.2+</td>
-                    <td>1.7</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Gecko</td>
-                    <td>Firefox 1.5</td>
-                    <td>Win 98+ / OSX.2+</td>
-                    <td>1.8</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Gecko</td>
-                    <td>Firefox 2.0</td>
-                    <td>Win 98+ / OSX.2+</td>
-                    <td>1.8</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Gecko</td>
-                    <td>Firefox 3.0</td>
-                    <td>Win 2k+ / OSX.3+</td>
-                    <td>1.9</td>
-                    <td>A</td>
-                  </tr>
-                </tbody>
-                  <tfoot>
-                  <tr>
-                     <th>Nome</th>
-                    <th>Email</th>
-                    <th>Contacto</th>
-                    <th>Localizacao</th>
-                    <th>Operacoes</th>
-                  </tr>
-                  </tfoot>
-                </table>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-
-
+          <!-- /.card-body -->
+          <div class="card-footer">
+            <button type="submit" class="btn btn-info" id="update_mobile" name="update_mobile"><?php echo get_phrase('Actualizar Estado');?></button>
           </div>
-          <!-- /.col -->
+          <?=form_close();?>
+        
         </div>
-        <!-- /.row -->
-
+        <!-- /.card -->     
      </div><!--/. container-fluid -->
 
     </section>
@@ -543,106 +367,6 @@
 
 <!-- PAGE SCRIPTS -->
 <script src="<?php echo base_url();?>assets/vendedor/dist/js/pages/dashboard2.js"></script>
-
-
-
-<script>
-  $(function () {
-    $("#example1").DataTable({
-      "responsive": true,
-      "autoWidth": false,
-    });
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": true,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
-    
-  });
-</script>
-
-<script type="text/javascript">
-  $(function(){
-
-    //Add Category
-    $('#btn_Produto').click(function(){
-      var nome_produto = $('#nome_produto').val();
-      if(nome_produto == ""){
-        alert('Introduza o Produto');
-      }
-      else{
-        $.ajax({
-          type:'ajax',
-          method:'POST',
-          url:'InserirProduto',
-          dataType:'json',
-          data:{nome_produto:nome_produto},
-          success:function(data){
-            alert('Produto Inserido');
-            $('#nome_produto').val("");
-          },
-          error:function(){
-            alert('Produto Existe! Tente Outro.');
-            $('#nome_produto').val("");
-          }
-        });
-      }
-    });
-    //Add Category End
-
-    //Add Subcategory Start
-
-    GetAllProducts()
-    function GetAllProducts(){
-      $.ajax({
-        type:'ajax',
-        url:'GetAllProducts',
-        success:function(data){
-         $('#show_selected_item_data').html(data);
-        },
-        error:function(){
-          alert('Produtos Não Encontrados.');
-        }
-      });
-    }
-
-    //Add Subcategory End
-
-    //Insert Subcategory Start
-
-    $('#btn_Marcas').click(function(){
-      var item_select = $('#item_select').val();
-      var marca = $('#marca').val();
-
-      if(marca == ""){
-        alert('Insira uma Marca');
-      }
-      else{
-        $.ajax({
-          type:'ajax',
-          method:'POST',
-          url:'InserirMarcas',
-          dataType:'json',
-          data:{item_select:item_select,marca:marca},
-          success:function(data){
-            alert('Marca Inserida.');
-            $('#marca').val("");
-          },
-          error:function(){
-            alert('Marca Existe! Tente Outra.')
-            $('#marca').val("");
-          }
-        });
-      }
-    });
-
-    //Insert Subcategory End
-  });
-</script>
 
 </body>
 </html>

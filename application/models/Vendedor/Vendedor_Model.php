@@ -11,7 +11,7 @@ class Vendedor_Model extends CI_Model
 	function CriarConta(){
 		$nome = $this->input->post('name_user');
 		$email = $this->input->post('email_user');
-		$password = $this->input->post('password_user');
+		$password = sha1($this->input->post('password_user'));
 		$agree = $this->input->post('agree');
 
 		$dados = $this->db->get_where('vendedor',array('email'=>$this->input->post('email_user')));
@@ -23,7 +23,7 @@ class Vendedor_Model extends CI_Model
 		}
 
 		else{
-		$insert_vendedor = $this->db->insert('vendedor',['nome_completo'=>$nome,'email'=>$email,'password'=>$password,'agree'=>'Yes']);			
+		$insert_vendedor = $this->db->insert('vendedor',['nome_completo'=>$nome,'email'=>$email,'password'=>$password,'agree'=>'Yes','status'=>'Validated']);			
 		
 		}
 		if ($insert_vendedor) {
@@ -37,12 +37,12 @@ class Vendedor_Model extends CI_Model
 
 	function Login(){
 		$email_user = $this->input->post('email_login');
-		$password_user = $this->input->post('password_login');
-
+		$password_user = sha1($this->input->post('password_login'));
+		
 		//Mensagem de parabens, login efectuado com sucesso
 
 		$check_user = $this->db->get_where('vendedor',['email'=>$email_user, 'password' => $password_user]);
-
+		
 		if($check_user->num_rows() > 0){
 			return true;
 		}
@@ -53,7 +53,7 @@ class Vendedor_Model extends CI_Model
 
 	function CheckInfo(){
 		$email_user = $this->session->userdata('email');
-		$password_user = $this->session->userdata('password');
+		$password_user = sha1($this->session->userdata('password'));
 
 		$check_vend = $this->db->get_where('vendedor',['email'=>$email_user,'password'=>$password_user]);
 
@@ -77,7 +77,7 @@ class Vendedor_Model extends CI_Model
 		$local = $this->input->post('local');
 
 		$email_user = $this->session->userdata('email');
-		$password_user = $this->session->userdata('password');
+		$password_user = sha1($this->session->userdata('password'));
 
 		$check_vend = $this->db->get_where('vendedor',['email'=>$email_user,'password'=>$password_user]);
 
@@ -129,7 +129,7 @@ class Vendedor_Model extends CI_Model
 
 	function GetVendData(){
 			$username = $this->session->userdata('email');
-			$password = $this->session->userdata('password');
+			$password = sha1($this->session->userdata('password'));
 
 			$check_vend = $this->db->get_where('vendedor', ['email'=>$username, 'password'=>$password]);
 
