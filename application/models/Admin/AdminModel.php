@@ -295,7 +295,7 @@ class AdminModel extends CI_Model
 	function getVerifiedUsers(){
 		$getV_users = $this->db->select()
 							   ->from('vendedor')
-							   ->where('status','Verified')
+							   ->where('status','Verifyied')
 							   ->get();
 		
 		if($getV_users->num_rows() > 0){

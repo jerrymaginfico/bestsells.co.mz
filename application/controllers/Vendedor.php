@@ -16,7 +16,7 @@ class Vendedor extends CI_Controller
 	function index(){
 		if($this->session->userdata('email') == "" && $this->session->userdata('password') == ""){
 			$this->load->view('Vendedor/index');
-		}
+ 		}
 		else{
 			return redirect('Vendedor/Dashboard');
 		}
@@ -66,7 +66,7 @@ class Vendedor extends CI_Controller
 			return redirect('Vendedor/Dashboard');
 		}
 		else{
-			$this->session->set_flashdata('msg','Your Username e Password Do Not Match To Any Account');
+			$this->session->set_flashdata('msg','Dados de Login Inválidos! Verifique Os Mesmos & Tente Novamente.');
 			return redirect('Vendedor/index');
 		}
 	}

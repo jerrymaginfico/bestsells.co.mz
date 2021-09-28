@@ -313,6 +313,13 @@ class Admin extends CI_Controller
 			}
 		}
 	}
+
+	//function to remove seller
+	function remove_user($vend_id){
+		$this->db->where('vend_id', $vend_id);
+        $this->db->delete('vendedor');
+        return redirect('Admin/Dashboard');
+	}
 }
 
 ?>

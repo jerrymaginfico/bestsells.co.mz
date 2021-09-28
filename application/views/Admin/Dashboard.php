@@ -161,7 +161,7 @@
               <div class="icon">
                 <i class="fas fa-users"></i>
               </div>
-              <a href="#" class="small-box-footer">
+              <a href="#verifyied_users" class="small-box-footer">
                 Ver Mais <i class="fas fa-arrow-circle-right"></i>
               </a>
             </div>
@@ -177,7 +177,7 @@
               <div class="icon">
                 <i class="fas fa-ban"></i>
               </div>
-              <a href="#" class="small-box-footer">
+              <a href="#suspended_users" class="small-box-footer">
                 Ver Mais <i class="fas fa-arrow-circle-right"></i>
               </a>
             </div>
@@ -187,7 +187,7 @@
           <!-- ./col -->
           <div class="col-lg-3 col-6">
             <!-- small card -->
-            <div class="small-box bg-warning">
+            <div class="small-box bg-info">
               <div class="inner">
                 <h3><?=count($ausers);?></h3>
 
@@ -207,9 +207,115 @@
         <!-- /.row -->
          <div class="row">
           <div class="col-12">
-            <div class="card card-warning card-outline" id="all_users">
+            <div class="card card-success card-outline" id="verifyied_users">
               <div class="card-header">
-                <h3 class="card-title"><?php echo get_phrase('Lista de Usuarios');?></h3>
+                <h3 class="card-title"><b><?php echo get_phrase('Usuários Verificados');?></b></h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Contacto</th>
+                    <th>Status</th>
+                    <th>Operacão</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <?php if(count($vusers)):?>
+                    <?php foreach($vusers as $user):?>
+                    <tr>
+                      <td><?=$user->nome_completo;?></td>
+                      <td><?=$user->email;?></td>
+                      <td><?=$user->vend_contato1;?></td>
+                      <td><?=$user->status;?></td>
+                      <td>
+                        <center>
+                          <a href="<?=base_url('admin/update_status/'.$user->vend_id);?>" class="btn btn-warning btn-circle btn-sm" title="Editar Estado"><i class="fa fa-ban"></i></a>
+                        </center>
+                      </td>
+                    </tr>
+                    <?php endforeach;
+                else:?>
+                  <tr>
+                    <td colspan="5"><h5><?php echo get_phrase('Sem Vendedores Verificados.');?></h5></td>
+                  </tr>
+                <?php endif;?>
+                </tbody>
+                  <tfoot>
+                  <tr>
+                     <th>Nome</th>
+                    <th>Email</th>
+                    <th>Contacto</th>
+                    <th>Status</th>
+                    <th>Operacão</th>
+                  </tr>
+                  </tfoot>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+            <br>
+            <br>
+            <div class="card card-danger card-outline" id="suspended_users">
+              <div class="card-header">
+                <h3 class="card-title"><b><?php echo get_phrase('Usuários Suspensos');?></b></h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Contacto</th>
+                    <th>Status</th>
+                    <th>Operacão</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <?php if(count($susers)):?>
+                    <?php foreach($susers as $user):?>
+                    <tr>
+                      <td><?=$user->nome_completo;?></td>
+                      <td><?=$user->email;?></td>
+                      <td><?=$user->vend_contato1;?></td>
+                      <td><?=$user->status;?></td>
+                      <td>
+                        <center>
+                          <a href="<?=base_url('admin/update_status/'.$user->vend_id);?>" class="btn btn-warning btn-circle btn-sm" title="Editar Estado"><i class="fa fa-ban"></i></a>
+                        </center>
+                      </td>
+                    </tr>
+                    <?php endforeach;
+                else:?>
+                  <tr>
+                    <td colspan="5" class="text-center"><h5><?php echo get_phrase('Sem Vendedores Suspensos.');?></h5></td>
+                  </tr>
+                <?php endif;?>
+                </tbody>
+                  <tfoot>
+                  <tr>
+                     <th>Nome</th>
+                    <th>Email</th>
+                    <th>Contacto</th>
+                    <th>Status</th>
+                    <th>Operacão</th>
+                  </tr>
+                  </tfoot>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+            <br>
+            <br>
+            <div class="card card-info card-outline" id="all_users">
+              <div class="card-header">
+                <h3 class="card-title"><b><?php echo get_phrase('Lista de Usuários');?></b></h3>
                  
               </div>
               <!-- /.card-header -->
@@ -235,14 +341,14 @@
                       <td>
                         <center>
                           <a href="<?=base_url('admin/update_status/'.$user->vend_id);?>" class="btn btn-warning btn-circle btn-sm" title="Editar Estado"><i class="fa fa-ban"></i></a>
-                          <a href="<?=base_url('admin/remove_user/'.$user->vend_id);?>" title="Remover Vendedor" class="btn btn-danger btn-circle btn-sm text-white"><i class="fa fa-times"></i></a
+                          <a onClick="return confirm('<?php echo get_phrase('Deseja Realmente Remover Este Vendedor?');?>')" href="<?=base_url('admin/remove_user/'.$user->vend_id);?>" title="Remover Vendedor" class="btn btn-danger btn-circle btn-sm text-white"><i class="fa fa-times"></i></a>
                         </center>
                       </td>
                     </tr>
                     <?php endforeach;
                 else:?>
                   <tr>
-                    <td colspan="5"><?php echo get_phrase('Sem Vendedores.');?></td>
+                   <td colspan="5"><h5><?php echo get_phrase('Sem Vendedores Registados.');?></h5></td>
                   </tr>
                 <?php endif;?>
                   </tbody>
@@ -252,122 +358,6 @@
                     <th>Email</th>
                     <th>Contacto</th>
                     <th>Status</th>
-                    <th>Operacoes</th>
-                  </tr>
-                  </tfoot>
-                </table>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-
-            <div class="card card-warning card-outline">
-              <div class="card-header">
-                <h3 class="card-title"><?php echo get_phrase('Produtos');?></h3>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
-                  <thead>
-                  <tr>
-                    <th>Nome</th>
-                    <th>Email</th>
-                    <th>Contacto</th>
-                    <th>Localizacao</th>
-                    <th>Operacoes</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr>
-                    <td>Trident</td>
-                    <td>Internet
-                      Explorer 4.0
-                    </td>
-                    <td>Win 95+</td>
-                    <td> 4</td>
-                    <td>X</td>
-                  </tr>
-                  <tr>
-                    <td>Trident</td>
-                    <td>Internet
-                      Explorer 5.0
-                    </td>
-                    <td>Win 95+</td>
-                    <td>5</td>
-                    <td>C</td>
-                  </tr>
-                  <tr>
-                    <td>Trident</td>
-                    <td>Internet
-                      Explorer 5.5
-                    </td>
-                    <td>Win 95+</td>
-                    <td>5.5</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Trident</td>
-                    <td>Internet
-                      Explorer 6
-                    </td>
-                    <td>Win 98+</td>
-                    <td>6</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Trident</td>
-                    <td>Internet Explorer 7</td>
-                    <td>Win XP SP2+</td>
-                    <td>7</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Trident</td>
-                    <td>AOL browser (AOL desktop)</td>
-                    <td>Win XP</td>
-                    <td>6</td>
-                    <td>
-                      <center>
-                      <a class="btn btn-warning btn-circle btn-sm"><i class="fa fa-ban"></i></a>
-                      <a class="btn btn-danger btn-circle btn-sm"><i class="fa fa-times"></i></a>
-                      </center>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Gecko</td>
-                    <td>Firefox 1.0</td>
-                    <td>Win 98+ / OSX.2+</td>
-                    <td>1.7</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Gecko</td>
-                    <td>Firefox 1.5</td>
-                    <td>Win 98+ / OSX.2+</td>
-                    <td>1.8</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Gecko</td>
-                    <td>Firefox 2.0</td>
-                    <td>Win 98+ / OSX.2+</td>
-                    <td>1.8</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Gecko</td>
-                    <td>Firefox 3.0</td>
-                    <td>Win 2k+ / OSX.3+</td>
-                    <td>1.9</td>
-                    <td>A</td>
-                  </tr>
-                </tbody>
-                  <tfoot>
-                  <tr>
-                     <th>Nome</th>
-                    <th>Email</th>
-                    <th>Contacto</th>
-                    <th>Localizacao</th>
                     <th>Operacoes</th>
                   </tr>
                   </tfoot>
